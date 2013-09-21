@@ -44,6 +44,15 @@ function UserList(){
 		});
 		return result;
 	};
+	this.getUserBySocket=function(socket){
+		var result=null;
+		_.each(this.users, function(user){
+			if(user.socket===socket){
+				result=user;
+			}
+		});
+		return result;
+	};
 	this.removeBySocket=function(socket){
 		this.users=_(this.users).reject(function(user) {
 			if(user.socket===socket){
@@ -81,7 +90,7 @@ function UserList(){
 		return this.users;
 	}
 	this.sendMessage=function(senderip, senderport, users, message){
-		var sender=this.getUserByIPAndPort(senderip, senderport);
+		var sender=this.getUserBySocket(socket);
 		var _this=this;
 		if(sender!=null){
 			_.each(users, function(requestedUser){
@@ -145,6 +154,7 @@ function parseRequest(remote, message, socket){
 	    			to=to.split(",");
 	    			connectedUsers.sendMessage(remote.address, remote.port , to, message);
 	    		} else {
+	    			var sender=connectedUsers.getUserBySocket(socket);
 	    			_.each(connectedUsers.users, function(user){
 						user.send("MESSAGE#"+sender.username+"#"+message);
 					});
