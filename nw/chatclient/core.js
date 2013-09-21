@@ -21,6 +21,12 @@ var User=function(){
 $(function(){
 	var host=prompt("Server IP:","");
 	var port=prompt("Server PORT:", "");
+	var username=prompt("Username:", "");
+	if(host==null || host=="" || port==null || host=="" || username==null || username == "") {
+		alert("Next time use valid values!");
+		process.exit();
+	}
+	_username=username;
 	connectToServer(host, port);
 	$("#sendBtn").addClass("disabled");
 });
