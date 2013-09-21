@@ -7,7 +7,7 @@ var printf = require('util').format;
 var net = require('net');
 
 /* GLOBALS */
-var username=process.argv.splice(2);
+var username="tester";
 
 /* SERVER-CLIENT SOCKET HYBRID */
 var socket = null;
@@ -33,11 +33,8 @@ function clientConnect(username){
     console.log(username);
     console.log(printf("Connecting as '%s'.", username));
     socket.write("CONNECT#"+username+"\n");
-    sendMessage("costel,maria", "test");
-}
-function disconnect(){
-    console.log("Disconnecting.");
-    socket.write("CLOSE\n");
+    sendMessage("tester", "testmessage");
+    socket.write("CLOSE#");
 }
 function sendMessage(to, message){
     console.log(printf("Sending message '%s' to [%s]", message, to));
