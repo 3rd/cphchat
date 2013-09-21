@@ -89,7 +89,7 @@ function UserList(){
 	this.getUsers=function(){
 		return this.users;
 	}
-	this.sendMessage=function(senderip, senderport, users, message){
+	this.sendMessage=function(socket, users, message){
 		var sender=this.getUserBySocket(socket);
 		var _this=this;
 		if(sender!=null){
@@ -152,7 +152,7 @@ function parseRequest(remote, message, socket){
     		if(typeof to !="undefined" && typeof message!="undefined"){
 	    		if(to!="*"){
 	    			to=to.split(",");
-	    			connectedUsers.sendMessage(remote.address, remote.port , to, message);
+	    			connectedUsers.sendMessage(socket , to, message);
 	    		} else {
 	    			var sender=connectedUsers.getUserBySocket(socket);
 	    			_.each(connectedUsers.users, function(user){

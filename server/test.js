@@ -33,7 +33,7 @@ function clientConnect(username){
     console.log(username);
     console.log(printf("Connecting as '%s'.", username));
     socket.write("CONNECT#"+username+"\n");
-    sendMessage("*", "test");
+    sendMessage("costel,maria", "test");
 }
 function disconnect(){
     console.log("Disconnecting.");
