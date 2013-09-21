@@ -1,0 +1,11 @@
+{
+  "name": "cphchat",
+  "main": "index.html",
+  "window": {
+    "toolbar": true,
+    "resizable": true, 
+    "kiosk" : false,
+    "width": 1000,
+    "height": 700
+  }
+}
