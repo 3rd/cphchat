@@ -77,24 +77,29 @@ $("#sendBtn").click(function(){
 		if($("#chat").is(":visible")){
 			//send the shit
 			//display the shit
-			var a=$('#scene').scrollTop()+$("#scene").height()+40;
-			var b=$('#scene')[0].scrollHeight;
-			var toScrollOrNotToScroll=(a==b?true:false);
-			drawSentMessage(text);
-			if(toScrollOrNotToScroll) scrollToBottom();
+			
+			//drawSentMessage(text);
 			sendCurrentMessage(text);
 		} else {
 			var log=$("<p/>");
 		    log.text(" CLIENT REQUEST: "+text+"\n");
 		    log.appendTo($("#console"));
+		    scrollTheThing();
 			window.socket.write(text+"\n");
 		}
 	}
 });
 
+function scrollTheThing(){
+	var a=$('#scene').scrollTop()+$("#scene").height()+40;
+	var b=$('#scene')[0].scrollHeight;
+	var toScrollOrNotToScroll=(a==b?true:false);
+	if(toScrollOrNotToScroll) scrollToBottom();
+}
+
 $("#consoleBtn").click(function(){
 	if(!$("#console").is(":visible")) $("#sendBtn").removeClass("disabled");
-	else $("#sendBtn").addClass("disabled");
+	else { clearConversation(); $("#sendBtn").addClass("disabled"); }
 	$("#chat").slideToggle();
 	$("#console").slideToggle();
 });
@@ -125,6 +130,7 @@ function redrawConversation(conversation){
 		}
 	});
 	$("#sendBtn").removeClass("disabled");
+	scrollTheThing();
 }
 function redrawConversationList(){
 	$("#conversations li").not(".title").remove();
