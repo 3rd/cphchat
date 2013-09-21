@@ -3,11 +3,14 @@ var dgram = require('dgram');
 var _ = require('underscore');
 var printf = require('util').format;
 var net = require('net');
+var fs = require('fs');
 
 /* CONSTANTS */
 var HOST=_.chain(require('os').networkInterfaces()).flatten().filter(function(val){ return (val.family == 'IPv4' && val.internal == false) }).pluck('address').first().value();
 var PORT=3333;
 console.log("Starting TCP server on "+HOST+":"+PORT);
+
+var log = fs.createWriteStream('log.txt', {'flags': 'a'});
 
 /* CLASSES */
 function User(ip, port, username, socket){
@@ -17,6 +20,7 @@ function User(ip, port, username, socket){
 	this.socket=socket;
 	this.send=function(message){
 		try {
+			logLine(printf("Data going to %s:%s -> %s", this.ip, this.port, message));
 			this.socket.write(message+"\n");
 		} catch(e){
 			console.log("Cannot write to socket.");
@@ -116,6 +120,7 @@ net.createServer(function (socket) {
 		(data+"").split('\n').forEach(function(data){
 			if(data.length>0){
 				console.log(printf("Data coming from %s:%s -> %s", ip, port, data));
+				logLine(printf("Data coming from %s:%s -> %s", ip, port, data));
 				parseRequest({address:ip, port:port}, data, socket);
 			}
 		});
@@ -127,6 +132,10 @@ net.createServer(function (socket) {
 		propagateOnlineUsers();
 	});
 }).listen(PORT, HOST);
+
+function logLine(message){
+	log.write(new Date().getTime() + " - " + message+"\r\n");
+}
 
 /* REQUEST PARSING */
 function parseRequest(remote, message, socket){
