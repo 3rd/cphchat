@@ -54,6 +54,12 @@ $(document).on("click", "#conversations li", function(){
 	}
 });
 
+$("#input").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#sendBtn").trigger("click");
+    }
+});
+
 $(document).on("click", "#onlineusers li", function(){
 	var username=$(this).text();
 	if($(this).hasClass("title")) return;
@@ -93,6 +99,7 @@ $("#sendBtn").click(function(){
 		    scrollTheThing();
 			window.socket.write(text+"\n");
 		}
+		$("#input").val("");
 	}
 });
 
