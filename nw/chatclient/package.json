@@ -2,7 +2,7 @@
   "name": "cphchat",
   "main": "index.html",
   "window": {
-    "toolbar": true,
+    "toolbar": false,
     "resizable": true, 
     "kiosk" : false,
     "width": 1000,
