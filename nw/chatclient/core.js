@@ -96,7 +96,6 @@ $("#sendBtn").click(function(){
 			var log=$("<p/>");
 		    log.text(" CLIENT REQUEST: "+text+"\n");
 		    log.appendTo($("#console"));
-		    scrollTheThing();
 			window.socket.write(text+"\n");
 		}
 		$("#input").val("");
@@ -107,7 +106,7 @@ function scrollTheThing(){
 	var a=$('#scene').scrollTop()+$("#scene").height()+40;
 	var b=$('#scene')[0].scrollHeight;
 	var toScrollOrNotToScroll=(a==b?true:false);
-	if(toScrollOrNotToScroll) scrollToBottom();
+	return toScrollOrNotToScroll;
 }
 
 $("#consoleBtn").click(function(){
@@ -130,6 +129,7 @@ function clearConversation(){
 	$("#chat").html('');
 }
 function redrawConversation(conversation){
+	var scroll=scrollTheThing();
 	$("#chat").html('');
 	var companion=conversation.companion;
 	var messages=conversation.messages;
@@ -143,7 +143,7 @@ function redrawConversation(conversation){
 		}
 	});
 	$("#sendBtn").removeClass("disabled");
-	scrollTheThing();
+	if(scroll) scrollToBottom();
 }
 function redrawConversationList(){
 	$("#conversations li").not(".title").remove();
