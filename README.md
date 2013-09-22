@@ -1,6 +1,30 @@
+#Screenshots
+![main](http://i40.tinypic.com/24y00li.png)
+![multiplatform](http://i43.tinypic.com/2dcakva.png)
+
+#Download the chat client
+
+>Got a major OS? We support it.
+
+Download links:
+
+* [Linux32bit](https://github.com/neculaesei/cphchat/releases/download/1.0/cphchat_linux_32bit.zip)
+* [MacOSX](https://github.com/neculaesei/cphchat/releases/download/1.0/cphchat_macosx.zip)
+* [Windows](https://github.com/neculaesei/cphchat/releases/download/1.0/cphchat_windows.zip)
+
+
+--- 
+
+#Getting the server
+
+The server is build on top of nodejs so you need nodejs to run it. You can find the server source code in `/server/server_tcp.js`. Run it like normal node script.
+
+---
+
+#The hand-in
 ## Description of design  
 ---
-For our design we have chosen to userJavascript using Node.js on the server and Node-Webkit for the client, which basically has an embedded Node.js server in it and uses the Webkit Engine to create desktop applications for all the platforms. 
+For our design we have chosen to use Javascript everywhere, nodejs on the server and node-webkit for the client, which basically has an embedded nodejs server in it and uses the Webkit Engine to create desktop applications for all the platforms. 
 
 ## State Behaviour
 ---
