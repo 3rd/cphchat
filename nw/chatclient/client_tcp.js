@@ -81,8 +81,9 @@ function parseRequest(message){
                 targetConversation=new Conversation(from);
                 var _user=new User();
                 _user.username=from;
-                //_user.avatar=
+                _user.avatar="assets/avatar2.png";
                 targetConversation.companion=_user;
+                console.log(targetConversation);
                 _conversations[from]=targetConversation;
                 _currentCompanion=from;
                 redrawlist=true;

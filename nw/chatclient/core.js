@@ -1,6 +1,6 @@
 //globals
 var _username="costel";
-var _myavatar="http://2.bp.blogspot.com/-oSS6GN2Njpo/UWwqlRbmLqI/AAAAAAAAF3s/kKcMn6CuTps/s00/Emma-Watson-3.jpg";
+var _myavatar="assets/avatar1.jpg";
 var _conversations=[];
 var _currentCompanion=null;
 
@@ -68,7 +68,7 @@ $(document).on("click", "#onlineusers li", function(){
 		var targetConversation=new Conversation(_currentCompanion);
         var _user=new User();
         _user.username=_currentCompanion;
-        //_user.avatar=
+        _user.avatar="assets/avatar2.png";
         targetConversation.companion=_user;
         _conversations[_currentCompanion]=targetConversation;
 		redrawConversation(_conversations[_currentCompanion]);
