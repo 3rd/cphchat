@@ -170,6 +170,7 @@ function drawSentMessage(message){
 	dom.find(".avatar span").text(_username);
 	dom.find(".avatar img").prop("src", _myavatar);
 	dom.find(".content .text").text(message);
+	dom.html(transformMessage(dom.html()));
 	dom.appendTo($("#chat"));
 }
 function drawReceivedMessage(from, avatar, message){
@@ -177,6 +178,7 @@ function drawReceivedMessage(from, avatar, message){
 	dom.find(".avatar span").text(from);
 	dom.find(".avatar img").prop("src", avatar);
 	dom.find(".content .text").text(message);
+	dom.html(transformMessage(dom.html()));
 	dom.appendTo($("#chat"));
 }
 
@@ -184,4 +186,44 @@ function scrollToBottom(){
 	var wtf    = $('#scene');
 	var height = wtf[0].scrollHeight;
 	wtf.scrollTop(height);
+}
+
+var emoticons={
+	";;)":5,
+	">:d<":6,
+	">:D<":6,
+	":-?":7,
+	":x":8,
+	":X":8,
+	":\">":9,
+	":p":10,
+	":P":10,
+	":*":11,
+	"=((":12,
+	":o":13,
+	":O":13,
+	"x(":14,
+	"X(":14,
+	":>":15,
+	"b-)":16,
+	"B-)":16,
+	":-s":17,
+	":-S":17,
+	":((":20,
+	":))":21,
+	":|":22,
+	"=))":24,
+	"8-|":29,
+	":-<":46,
+	":)":1,
+	":(":2,
+	";)":3,
+	":d":4,
+	":D":4
+};
+function transformMessage(message){
+	for(var k in emoticons){
+		message=message.split(k).join("<img src='assets/emoticons/"+emoticons[k]+".gif'/>");
+	}
+	return message;
 }
